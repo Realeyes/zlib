@@ -70,6 +70,16 @@
 #define WRITEBUFFERSIZE (16384)
 #define MAXFILENAME (256)
 
+#if WINAPI_FAMILY==2
+uLong filetime(f, tmzip, dt)
+    char *f;                /* name of file to get info on */
+    tm_zip *tmzip;             /* return value: access, modific. and creation times */
+    uLong *dt;             /* dostime */
+{
+	//Not allowed to change a file's date in Windows Store mode
+	return;
+}
+#else
 #ifdef _WIN32
 uLong filetime(f, tmzip, dt)
     char *f;                /* name of file to get info on */
@@ -144,6 +154,7 @@ uLong filetime(f, tmzip, dt)
 {
     return 0;
 }
+#endif
 #endif
 #endif
 

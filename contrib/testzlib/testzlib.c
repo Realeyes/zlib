@@ -85,8 +85,12 @@ void BeginCountPerfCounter(LARGE_INTEGER * pbeginTime64,BOOL fComputeTimeQueryPe
 {
     if ((!fComputeTimeQueryPerf) || (!QueryPerformanceCounter(pbeginTime64)))
     {
-        pbeginTime64->LowPart = GetTickCount();
+#if WINAPI_FAMILY==2
+		pbeginTime64->QuadPart = GetTickCount64();
+#else
+		pbeginTime64->LowPart = GetTickCount();
         pbeginTime64->HighPart = 0;
+#endif
     }
 }
 
@@ -97,7 +101,14 @@ DWORD GetMsecSincePerfCounter(LARGE_INTEGER beginTime64,BOOL fComputeTimeQueryPe
     DWORD dwLog=16+0;
     DWORD dwRet;
     if ((!fComputeTimeQueryPerf) || (!QueryPerformanceCounter(&endTime64)))
+	{
+#if WINAPI_FAMILY==2
+		//Windows Store support
+        dwRet = (DWORD)((GetTickCount64() - beginTime64.QuadPart)*1);
+#else
         dwRet = (GetTickCount() - beginTime64.LowPart)*1;
+#endif
+	}
     else
     {
         MyDoMinus64(&ticks,endTime64,beginTime64);
@@ -155,8 +166,13 @@ int main(int argc, char *argv[])
     unsigned char* CprPtr;
     unsigned char* UncprPtr;
     long lSizeCpr,lSizeUncpr;
-    DWORD dwGetTick,dwMsecQP;
-    LARGE_INTEGER li_qp,li_rdtsc,dwResRdtsc;
+#if WINAPI_FAMILY==2
+    ULONGLONG dwGetTick;
+#else
+    DWORD dwGetTick;
+#endif
+	DWORD dwMsecQP;
+	LARGE_INTEGER li_qp,li_rdtsc,dwResRdtsc;
 
     if (argc<=1)
     {
@@ -186,7 +202,11 @@ int main(int argc, char *argv[])
     CprPtr=(unsigned char*)malloc(lBufferSizeCpr + BlockSizeCompress);
 
     BeginCountPerfCounter(&li_qp,TRUE);
+#if WINAPI_FAMILY==2
+    dwGetTick=GetTickCount64();
+#else
     dwGetTick=GetTickCount();
+#endif
     BeginCountRdtsc(&li_rdtsc);
     {
         z_stream zcpr;
@@ -214,7 +234,11 @@ int main(int argc, char *argv[])
 
         lSizeCpr=zcpr.total_out;
         deflateEnd(&zcpr);
+#if WINAPI_FAMILY==2
+        dwGetTick=GetTickCount64()-dwGetTick;
+#else
         dwGetTick=GetTickCount()-dwGetTick;
+#endif
         dwMsecQP=GetMsecSincePerfCounter(li_qp,TRUE);
         dwResRdtsc=GetResRdtsc(li_rdtsc,TRUE);
         printf("total compress size = %u, in %u step\n",lSizeCpr,step);
@@ -227,7 +251,11 @@ int main(int argc, char *argv[])
     UncprPtr=(unsigned char*)malloc(lBufferSizeUncpr + BlockSizeUncompress);
 
     BeginCountPerfCounter(&li_qp,TRUE);
+#if WINAPI_FAMILY==2
+    dwGetTick=GetTickCount64();
+#else
     dwGetTick=GetTickCount();
+#endif
     BeginCountRdtsc(&li_rdtsc);
     {
         z_stream zcpr;
@@ -255,7 +283,11 @@ int main(int argc, char *argv[])
 
         lSizeUncpr=zcpr.total_out;
         inflateEnd(&zcpr);
+#if WINAPI_FAMILY==2
+        dwGetTick=GetTickCount64()-dwGetTick;
+#else
         dwGetTick=GetTickCount()-dwGetTick;
+#endif
         dwMsecQP=GetMsecSincePerfCounter(li_qp,TRUE);
         dwResRdtsc=GetResRdtsc(li_rdtsc,TRUE);
         printf("total uncompress size = %u, in %u step\n",lSizeUncpr,step);

@@ -85,6 +85,10 @@ void change_file_date(filename,dosdate,tmu_date)
     uLong dosdate;
     tm_unz tmu_date;
 {
+#if WINAPI_FAMILY==2
+	//Not allowed to change the file's date in Windows Store mode
+	return;
+#else
 #ifdef _WIN32
   HANDLE hFile;
   FILETIME ftm,ftLocal,ftCreate,ftLastAcc,ftLastWrite;
@@ -113,6 +117,7 @@ void change_file_date(filename,dosdate,tmu_date)
 
   ut.actime=ut.modtime=mktime(&newdate);
   utime(filename,&ut);
+#endif
 #endif
 #endif
 }
@@ -638,6 +643,12 @@ int main(argc,argv)
         ret_value = do_list(uf);
     else if (opt_do_extract==1)
     {
+#if WINAPI_FAMILY==2
+        {
+          printf("Cannot change working directory in Windows Store mode..\n");
+          exit(-1);
+        }
+#endif
 #ifdef _WIN32
         if (opt_extractdir && _chdir(dirname))
 #else
