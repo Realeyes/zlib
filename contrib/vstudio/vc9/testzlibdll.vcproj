@@ -23,8 +23,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="x86\TestZlibDll$(ConfigurationName)"
-			IntermediateDirectory="x86\TestZlibDll$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\TestZlibDll$(ConfigurationName)"
+			IntermediateDirectory="Win32\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
 			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			CharacterSet="2"
@@ -70,7 +70,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="x86\ZlibDllDebug\zlibwapi.lib"
+				AdditionalDependencies="Win32\ZlibDllDebug\zlibwapi.lib"
 				OutputFile="$(OutDir)/testzlib.exe"
 				LinkIncremental="2"
 				GenerateManifest="false"
@@ -105,8 +105,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="x86\TestZlibDll$(ConfigurationName)"
-			IntermediateDirectory="x86\TestZlibDll$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\TestZlibDll$(ConfigurationName)"
+			IntermediateDirectory="Win32\TestZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
 			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			CharacterSet="2"
@@ -155,7 +155,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="x86\ZlibDllRelease\zlibwapi.lib"
+				AdditionalDependencies="Win32\ZlibDllRelease\zlibwapi.lib"
 				OutputFile="$(OutDir)/testzlib.exe"
 				LinkIncremental="1"
 				GenerateManifest="false"

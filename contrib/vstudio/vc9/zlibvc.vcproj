@@ -23,8 +23,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="x86\ZlibDll$(ConfigurationName)"
-			IntermediateDirectory="x86\ZlibDll$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\ZlibDll$(ConfigurationName)"
+			IntermediateDirectory="Win32\ZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="2"
 			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			UseOfMFC="0"
@@ -309,8 +309,8 @@
 		</Configuration>
 		<Configuration
 			Name="ReleaseWithoutAsm|Win32"
-			OutputDirectory="x86\ZlibDll$(ConfigurationName)"
-			IntermediateDirectory="x86\ZlibDll$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\ZlibDll$(ConfigurationName)"
+			IntermediateDirectory="Win32\ZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="2"
 			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			UseOfMFC="0"
@@ -605,8 +605,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="x86\ZlibDll$(ConfigurationName)"
-			IntermediateDirectory="x86\ZlibDll$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\ZlibDll$(ConfigurationName)"
+			IntermediateDirectory="Win32\ZlibDll$(ConfigurationName)\Tmp"
 			ConfigurationType="2"
 			InheritedPropertySheets="UpgradeFromVC70.vsprops"
 			UseOfMFC="0"

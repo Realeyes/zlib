@@ -24,8 +24,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="x86\TestZlib$(ConfigurationName)"
-			IntermediateDirectory="x86\TestZlib$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\TestZlib$(ConfigurationName)"
+			IntermediateDirectory="Win32\TestZlib$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
 			CharacterSet="2"
 			>
@@ -252,8 +252,8 @@
 		</Configuration>
 		<Configuration
 			Name="ReleaseWithoutAsm|Win32"
-			OutputDirectory="x86\TestZlib$(ConfigurationName)"
-			IntermediateDirectory="x86\TestZlib$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\TestZlib$(ConfigurationName)"
+			IntermediateDirectory="Win32\TestZlib$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
@@ -490,8 +490,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="x86\TestZlib$(ConfigurationName)"
-			IntermediateDirectory="x86\TestZlib$(ConfigurationName)\Tmp"
+			OutputDirectory="Win32\TestZlib$(ConfigurationName)"
+			IntermediateDirectory="Win32\TestZlib$(ConfigurationName)\Tmp"
 			ConfigurationType="1"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
